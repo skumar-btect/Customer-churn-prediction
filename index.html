@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Project 3: Customer Churn Prediction | S. Kumar</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:Inter,sans-serif;background:#f8fafc;color:#1e293b;padding:20px}
+.header{background:#1e0a3c;color:#f8fafc;padding:20px 24px;border-radius:12px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center}
+.header h1{font-size:18px;font-weight:600}.header p{font-size:12px;color:#c4b5fd;margin-top:3px}
+.badge{background:rgba(196,181,253,0.15);color:#c4b5fd;padding:4px 12px;border-radius:100px;font-size:11px;border:1px solid rgba(196,181,253,0.3)}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.kpi{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px}
+.kpi .label{font-size:11px;color:#64748b;font-weight:500;text-transform:uppercase;letter-spacing:0.5px}
+.kpi .val{font-size:28px;font-weight:600;margin:6px 0 2px;line-height:1}
+.kpi .note{font-size:11px;color:#64748b}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.grid-3{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:12px}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:16px}
+.card-title{font-size:11px;color:#64748b;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px}
+.rb{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:8px;margin-bottom:6px;border:1px solid transparent}
+.metric-box{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:8px;margin-bottom:6px;border:1px solid transparent}
+.footer{text-align:center;padding:16px;color:#94a3b8;font-size:11px;margin-top:8px}
+</style></head><body>
+<div class="header">
+  <div><h1>Customer Churn Prediction · Retention Analytics</h1><p>Consumer internet · 10,000 users · Scikit-learn · 88%+ AUC · 20+ features · Hypothesis tested · Python · Git</p></div>
+  <span class="badge">S. Kumar · Data Analyst · Project 3</span>
+</div>
+<div class="kpi-row">
+  <div class="kpi"><div class="label">Total users</div><div class="val" style="color:#2563eb">10,000</div><div class="note">Clean dataset</div></div>
+  <div class="kpi"><div class="label">Churn rate</div><div class="val" style="color:#dc2626">23.0%</div><div class="note">2,303 churned</div></div>
+  <div class="kpi"><div class="label">Model AUC</div><div class="val" style="color:#16a34a">88%+</div><div class="note">Scikit-learn pipeline</div></div>
+  <div class="kpi"><div class="label">Revenue at risk</div><div class="val" style="color:#d97706">&#8377;1.67L</div><div class="note">Monthly exposure</div></div>
+</div>
+<div class="grid-2">
+  <div class="card">
+    <div class="card-title">Churn rate by subscription plan</div>
+    <div style="position:relative;height:220px"><canvas id="c3plan"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Churn rate by tenure band</div>
+    <div style="position:relative;height:220px"><canvas id="c3tenure"></canvas></div>
+  </div>
+</div>
+<div class="grid-3">
+  <div class="card">
+    <div class="card-title">Risk band distribution</div>
+    <div class="rb" style="background:#f0fdf4;border-color:#bbf7d0"><span style="font-size:12px;color:#16a34a">Low risk</span><span style="font-size:18px;font-weight:600;color:#16a34a">5,244</span></div>
+    <div class="rb" style="background:#fffbeb;border-color:#fde68a"><span style="font-size:12px;color:#d97706">Medium risk</span><span style="font-size:18px;font-weight:600;color:#d97706">3,710</span></div>
+    <div class="rb" style="background:#fef2f2;border-color:#fecaca"><span style="font-size:12px;color:#dc2626">High risk</span><span style="font-size:18px;font-weight:600;color:#dc2626">922</span></div>
+    <div class="rb" style="background:#fef2f2;border-color:#fecaca"><span style="font-size:12px;color:#dc2626">Critical</span><span style="font-size:18px;font-weight:600;color:#991b1b">123</span></div>
+    <div style="position:relative;height:130px;margin-top:10px"><canvas id="c3risk"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Users by plan</div>
+    <div style="position:relative;height:260px"><canvas id="c3users"></canvas></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Key model outcomes</div>
+    <div class="metric-box" style="background:#f0fdf4;border-color:#bbf7d0"><span style="font-size:12px;color:#16a34a">Model AUC</span><span style="font-size:18px;font-weight:600;color:#16a34a">88%+</span></div>
+    <div class="metric-box" style="background:#eff6ff;border-color:#bfdbfe"><span style="font-size:12px;color:#2563eb">Features engineered</span><span style="font-size:18px;font-weight:600;color:#2563eb">20+</span></div>
+    <div class="metric-box" style="background:#fffbeb;border-color:#fde68a"><span style="font-size:12px;color:#d97706">30-day retention gain</span><span style="font-size:18px;font-weight:600;color:#d97706">+12%</span></div>
+    <div class="metric-box" style="background:#fef2f2;border-color:#fecaca"><span style="font-size:12px;color:#dc2626">Monthly rev at risk</span><span style="font-size:18px;font-weight:600;color:#dc2626">&#8377;1.67L</span></div>
+    <p style="font-size:11px;color:#64748b;margin-top:8px">Hypothesis testing confirmed feature significance. Power BI retention dashboard targeting high-risk segments improved 30-day retention 12%.</p>
+  </div>
+</div>
+<div class="footer">Built by <strong>S. Kumar</strong> · Churn Prediction · Python · Scikit-Learn · SQL Window Functions · Power BI · Git</div>
+<script>
+new Chart('c3plan',{type:'bar',data:{labels:['Premium','Basic','Standard'],datasets:[{data:[44.5,17.9,17.4],backgroundColor:['#ef4444','#f59e0b','#3b82f6'],borderRadius:6,borderSkipped:false}]},options:{maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw+'%'}}},scales:{y:{max:60,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}});
+new Chart('c3tenure',{type:'bar',data:{labels:['0-6m','6-12m','12-24m','24-36m','36m+'],datasets:[{data:[55.0,21.6,19.3,19.7,20.1],backgroundColor:['#ef4444','#7c3aed','#7c3aed','#7c3aed','#7c3aed'],borderRadius:6,borderSkipped:false}]},options:{maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.raw+'%'}}},scales:{y:{max:70,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}});
+new Chart('c3risk',{type:'doughnut',data:{labels:['Low','Medium','High','Critical'],datasets:[{data:[5244,3710,922,123],backgroundColor:['#16a34a','#f59e0b','#ef4444','#9f1239'],borderWidth:0}]},options:{cutout:'58%',maintainAspectRatio:false,plugins:{legend:{display:false}}}});
+new Chart('c3users',{type:'bar',data:{labels:['Standard','Basic','Premium'],datasets:[{data:[4099,3887,2014],backgroundColor:['#3b82f6','#22d3ee','#7c3aed'],borderRadius:6,borderSkipped:false}]},options:{maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{},x:{grid:{display:false}}}}});
+</script></body></html>
