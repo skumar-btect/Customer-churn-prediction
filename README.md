@@ -1,4 +1,4 @@
-# Project 3 — Customer Churn Prediction
+# Project  — Customer Churn Prediction
 
 **Domain:** Consumer Internet | **Tools:** Python · Scikit-Learn · Pandas · SQL · Power BI
 
